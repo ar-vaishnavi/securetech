@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User Registration</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+	<style>
+		* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"), #000;
+            background-position: center;
+            background-size: cover;
+            z-index: -1;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: 600;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .wrapper {
+            width: 400px;
+            border-radius: 40px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 8px rgba(230, 11, 11, 0.1);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        .input-field {
+            position: relative;
+            border-bottom: 2px solid #ccc;
+            margin: 20px 0;
+        }
+
+        .input-field label {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 16px;
+            pointer-events: none;
+            transition: 0.15s ease;
+        }
+
+        .input-field input {
+            width: 100%;
+            height: 50px;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #fff;
+            padding: 0 10px;
+        }
+
+        .input-field input:focus~label,
+        .input-field input:valid~label {
+            font-size: 0.8rem;
+            top: 10px;
+            transform: translateY(-120%);
+        }
+
+        .wrapper a {
+            color: #efefef;
+            text-decoration: none;
+        }
+
+        .wrapper a:hover {
+            text-decoration: underline;
+            color: #fff;
+        }
+
+        button {
+            background: #fff;
+            color: #000;
+            font-weight: 600;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
+            border: 2px solid transparent;
+            transition: 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            color: #fff;
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 30px;
+            color: #fff;
+        }
+
+        .alert {
+            border-radius: 10px;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+        }
+
+        .alert-info {
+            background-color: rgba(23, 162, 184, 0.2);
+        }
+	</style>
+</head>
+<body>
+<!-- Navigation bar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+	<div class="container">
+		<a class="navbar-brand" href="#" th:href="@{/}">Secure Tech</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
+</nav>
+
+<div class="main-content">
+	<div class="wrapper">
+		<!-- success message -->
+		<div th:if="${param.success}" class="alert alert-info">
+			You've successfully registered, Please Log in now!
+		</div>
+
+		<form th:action="@{/registration}" method="post" th:object="${user}">
+			<h2>Registration</h2>
+
+			<div class="input-field">
+				<input type="text" id="firstName" th:field="*{firstName}" required>
+				<label>First Name</label>
+			</div>
+
+			<div class="input-field">
+				<input type="text" id="lastName" th:field="*{lastName}" required>
+				<label>Last Name</label>
+			</div>
+
+			<div class="input-field">
+				<input type="email" id="email" th:field="*{email}" required>
+				<label>Email</label>
+			</div>
+
+			<div class="input-field">
+				<input type="password" id="password" th:field="*{password}" required>
+				<label>Password</label>
+			</div>
+
+			<button type="submit" class="btn btn-success">Register</button>
+
+			<div class="login-link">
+				<span>Already registered? <a href="/" th:href="@{/login}">Login here</a></span>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
