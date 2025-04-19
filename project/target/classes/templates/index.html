@@ -222,7 +222,7 @@
 				Protect yourself from digital threats with our security tools
 			</p>
 
-			<div class="feature-buttons">
+			<!-- <div class="feature-buttons">
 				<button class="feature-btn deepfake">
 					<i class="fas fa-user-secret"></i>
 					Deepfake Detection
@@ -235,7 +235,23 @@
 					<i class="fas fa-envelope"></i>
 					Spam Mail Detection
 				</button>
-			</div>
+			</div> -->
+
+            <div class="feature-buttons">
+                <a href="deepfake.html" target="_blank" class="feature-btn deepfake">
+                    <i class="fas fa-user-secret"></i>
+                    Deepfake Detection
+                </a>
+                <a href="spamCall.html" target="_blank" class="feature-btn spam-call">
+                    <i class="fas fa-phone-slash"></i>
+                    Spam Call Detection
+                </a>
+                <a href="spamMail.html" target="_blank" class="feature-btn spam-mail">
+                    <i class="fas fa-envelope"></i>
+                    Spam Mail Detection
+                </a>
+            </div>
+            
 		</div>
 
 		<div sec:authorize="!isAuthenticated()">
